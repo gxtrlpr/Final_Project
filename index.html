@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments and schedule</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1d5fa6">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <a class="skip-link" href="#mainContent">Skip to main content</a>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <a class="logo-link" href="https://ccsjdm.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the City College of San Jose del Monte website">
+                <img class="logo" src="assets/ccsjdm-seal.jpeg" alt="City College of San Jose del Monte official seal">
+            </a>
+            <span class="brand-title">Appointments and schedule</span>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
+
+        <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+            <a href="index.html" class="active">Home</a>
+            <a href="services.html">Appointments</a>
+            <a href="events.html">Events</a>
+            <a href="my-events.html">My Schedule</a>
+            <span class="nav-role-slot" id="navRoleSlot"></span>
+            <button type="button" class="nav-text-btn" id="themeToggleBtn" aria-pressed="false">Dark mode</button>
+            <span class="nav-auth-area" id="navAuthArea"></span>
+        </nav>
+    </header>
+
+    <main id="mainContent">
+
+        <div id="reminderBannerSlot"></div>
+
+        <section class="hero">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <h1>Book appointments and get queue numbers</h1>
+                    <p class="hero-lead">Book an appointment with a school office or your professor, get a digital queue number for walk-ins, check the requirements before you travel, and keep every campus schedule in one place.</p>
+                    <div class="hero-actions">
+                        <a href="services.html" class="btn-primary btn-hero">Book appointment</a>
+                        <a href="events.html" class="btn-secondary btn-hero">Browse events</a>
+                    </div>
+                    <p class="hero-note">Log in so your appointments and queue numbers stay private to you.</p>
+                </div>
+                <div class="hero-brand">
+                    <img src="assets/ccsjdm-wordmark.jpeg" alt="City College of San Jose del Monte">
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+
+            <section class="home-summary" aria-label="Today at a glance">
+                <div class="home-primary">
+                    <span class="home-stat-num" id="homeSlotsToday">Loading</span>
+                    <span class="home-stat-label">Appointment slots left today</span>
+                </div>
+                <ul class="home-secondary">
+                    <li><span class="home-secondary-num" id="homeOpenOffices">Loading</span> offices open now</li>
+                    <li><span class="home-secondary-num" id="homeInQueue">Loading</span> people in queue</li>
+                    <li><span class="home-secondary-num" id="homeEventCount">Loading</span> upcoming events</li>
+                </ul>
+            </section>
+
+            <section class="home-section" id="officesSection">
+                <h2>Offices and services</h2>
+                <p class="section-lead">Choose an office to see its services, requirements, and schedule. Book an appointment ahead of time, or take a digital queue number when walk-ins are open.</p>
+                <div class="office-grid" id="homeOfficeGrid"></div>
+                <div class="home-cta">
+                    <a href="services.html" class="btn-primary">View all offices and professors</a>
+                </div>
+            </section>
+
+            <section class="home-section">
+                <h2>How it works</h2>
+                <ol class="steps-list">
+                    <li><span class="step-num">1</span><div><h4>Choose an office or professor</h4><p>Browse the directory and open the service you need.</p></div></li>
+                    <li><span class="step-num">2</span><div><h4>Check the requirements</h4><p>Review the checklist so you bring everything on your first trip.</p></div></li>
+                    <li><span class="step-num">3</span><div><h4>Book a slot or take a number</h4><p>Pick a date and time, or get a digital queue number if walk-ins are open.</p></div></li>
+                    <li><span class="step-num">4</span><div><h4>Track it in my schedule</h4><p>See your reference number, QR code, queue position, and status updates.</p></div></li>
+                </ol>
+            </section>
+
+            
+
+            <section class="home-section">
+                <h2>Featured events</h2>
+                <div class="events-grid" id="featuredEventsGrid"></div>
+                <div class="home-cta">
+                    <a href="events.html" class="btn-primary">See All Events</a>
+                </div>
+            </section>
+
+            <section class="info-split">
+                <div class="info-split-text">
+                    <h2>For student organizations</h2>
+                    <p>Accredited organizations and offices manage their activities through the Event Dashboard. Event organizers can publish events, monitor registrations in real time, record attendance at the venue, and review attendance reports afterwards.</p>
+                    <p class="info-note">The Event Dashboard requires an event organizer login and is available on desktop computers only.</p>
+                    <a href="officer.html" class="btn-outline-primary">Go to Event Dashboard</a>
+                </div>
+                <div class="info-split-seal">
+                    <img src="assets/ccsjdm-seal.jpeg" alt="City College of San Jose del Monte seal">
+                    <p>Established 2017</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Appointments and schedule. All Rights Reserved.</p>
+        <p class="demo-note">Prototype / demo build for a class presentation. No real data is stored.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="services.js"></script>
+</body>
+</html>
