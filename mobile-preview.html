@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Preview | Appointments and schedule</title>
+    <style>
+        html, body { margin: 0; height: 100%; background: #1f2430; font-family: Arial, Helvetica, sans-serif; }
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; box-sizing: border-box; }
+        .phone { width: 430px; height: 900px; background: #0b0d12; border-radius: 46px; padding: 14px; box-sizing: border-box; box-shadow: 0 30px 60px rgba(0,0,0,0.45), inset 0 0 0 2px #2b303b; display: flex; flex-direction: column; }
+        .screen { flex: 1; background: #ffffff; border-radius: 34px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+        .status-bar { height: 34px; background: #1d5fa6; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+        .camera { width: 12px; height: 12px; border-radius: 50%; background: #0b0d12; }
+        .app-bar { height: 52px; background: #1d5fa6; color: #fff; display: flex; align-items: center; gap: 10px; padding: 0 14px; flex-shrink: 0; }
+        .app-bar img { width: 32px; height: 32px; border-radius: 50%; background: #fff; }
+        .app-bar strong { font-size: 15px; }
+        .app-bar .menu { margin-left: auto; font-size: 20px; }
+        iframe { flex: 1; width: 100%; border: 0; background: #f4f7fc; }
+        .nav-bar { height: 46px; display: flex; justify-content: space-around; align-items: center; background: #fff; border-top: 1px solid #e2e8f0; flex-shrink: 0; color: #64748b; font-size: 18px; }
+        .gesture { height: 26px; display: flex; align-items: center; justify-content: center; background: #fff; flex-shrink: 0; }
+        .gesture span { width: 120px; height: 5px; border-radius: 3px; background: #1f2430; }
+        .caption { position: absolute; left: 0; right: 0; bottom: -58px; color: #cbd5e1; text-align: center; font-size: 14px; }
+        @media (max-width: 480px) { body { padding: 0; } .phone { width: 100vw; height: 100vh; border-radius: 0; padding: 0; } .screen { border-radius: 0; } .caption { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="phone" role="img" aria-label="Android phone showing the Appointments and schedule web app">
+        <div class="screen">
+            <div class="status-bar"><span>9:41</span><span class="camera"></span><span>5G &bull; 86%</span></div>
+            <div class="app-bar">
+                <img src="assets/ccsjdm-seal.jpeg" alt="">
+                <strong>Appointments and schedule</strong>
+                <span class="menu"></span>
+            </div>
+            <iframe src="index.html" title="Live app preview" loading="eager"></iframe>
+            <div class="nav-bar"><span></span><span></span><span></span></div>
+            <div class="gesture"><span></span></div>
+        </div>
+        <p class="caption">Mobile preview. Open the site on an Android phone and choose "Install app" to add it to the home screen.</p>
+    </div>
+</body>
+</html>
