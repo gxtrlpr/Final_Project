@@ -44,3 +44,23 @@ Source: /home/user/project (unchanged). This copy holds the flat restyle.
 - Footer About, Privacy Policy, and Contact restored as links to new pages: about.html, privacy.html, contact.html. They replace the old "#" placeholders.
 - Footer links now have a simple flat style (the original had none).
 - Not restored: emoji icons on event cards, detail pages, and the empty state. They conflict with the "no emoji icons" rule. Pending user decision.
+
+## Round 5: duplicate Student ID column
+- Registrants table on officer.html: removed the second "Student ID" column. It repeated the student ID, because the pass code is the student ID. Empty-state colspan changed from 7 to 6.
+- Attendees list on checkin.html: removed the same duplicate column. Empty-state colspan changed from 7 to 6.
+- Check-in by code still uses the same value. Only the repeated display column was removed.
+- Audit: every table on all pages, for visitor and host sessions, plus the professor page, was checked with jsdom. Each table's header count matches every row's cell count, and no table has duplicate headers.
+
+## Round 6: event dates moved to November
+- Event dates: OCT 10, 15, 22, 29 changed to NOV 10, 15, 22, 29. Registration deadlines OCT 07, 13, 20, 27 changed to NOV 07, 13, 20, 27. Day numbers unchanged.
+- Login pop-up blur restored (backdrop blur 3px on .auth-modal and .modal). The restyle had removed it, but the original brief requires the pop-up to blur and dim the background.
+- Test harness only (not the app): the date-filter test uses November dates. The queue test starts from an empty queue, because the demo seed adds today's tickets. The clinic walk-in check runs only when the clinic is open, matching the registrar check.
+- Open: queuePosition counts a ticket that is being served as still ahead until it is completed. One test expects it to stop counting once called. Pending a decision.
+
+## Round 7: course and name placeholders
+- Every course reference (BSIT 3A, BSCS 1B, BSBA 2C, BSCS 2A, and the "BSIT and BSCS" event audience text) now reads "BSEMC-GD and BSEMC-DA".
+- Seeded student names are "Student. Name". Seeded professor names are "Professor. Name". Form placeholder examples follow the same rule.
+- Event speaker: "Professor. Name, President, CCSJDM".
+- Professor emails use their faculty IDs (for example fac-001@ccsjdm.edu.ph) instead of surnames.
+- Note: the user's text said "Proffesor. Name". The spelling was corrected to "Professor. Name". Tell me if the misspelling was intended.
+- Tests: expectations updated to the placeholder names. The queue-position question remains open.
