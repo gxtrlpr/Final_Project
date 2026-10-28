@@ -158,30 +158,30 @@ const seedEvents = [
     {
         id: 1,
         title: 'Leadership Seminar 2026',
-        date: 'OCT 10, 2026',
+        date: 'NOV 10, 2026',
         time: '9:00 AM - 4:00 PM',
         venue: 'San Jose Hall, CCSJDM Main Campus',
         organizer: 'CCSJDM Student Council',
         category: 'Seminar',
         description: 'Join an engaging day of academic leadership training and character development.',
         capacity: 50,
-        registrationDeadline: 'OCT 07, 2026',
-        targetAudience: 'BSIT and BSCS majors, 2nd to 4th year',
-        speaker: 'Mr. Jose S. Dela Cruz, President, CCSJDM',
+        registrationDeadline: 'NOV 07, 2026',
+        targetAudience: 'BSEMC-GD and BSEMC-DA majors, 2nd to 4th year',
+        speaker: 'Professor. Name, President, CCSJDM',
         requirements: ['Student ID', 'Completed application form', 'Proof of enrollment'],
         reminderNote: 'Bring your Student ID at check-in. Seats are assigned on arrival.'
     },
     {
         id: 2,
         title: 'Freshmen Orientation',
-        date: 'OCT 15, 2026',
+        date: 'NOV 15, 2026',
         time: '8:00 AM - 12:00 PM',
         venue: 'Main Auditorium',
         organizer: 'CCSJDM Student Council',
         category: 'Seminar',
         description: 'A welcome event for all first-year students entering the campus.',
         capacity: 200,
-        registrationDeadline: 'OCT 13, 2026',
+        registrationDeadline: 'NOV 13, 2026',
         targetAudience: 'All first-year students',
         speaker: 'University President',
         requirements: ['Student ID', 'Valid ID'],
@@ -190,14 +190,14 @@ const seedEvents = [
     {
         id: 3,
         title: 'Cultural Night',
-        date: 'OCT 22, 2026',
+        date: 'NOV 22, 2026',
         time: '5:00 PM - 9:00 PM',
         venue: 'Open Court',
         organizer: 'Cultural Arts Group',
         category: 'Culture',
         description: 'An evening showcasing local talents, performances, and cultural heritage.',
         capacity: 100,
-        registrationDeadline: 'OCT 20, 2026',
+        registrationDeadline: 'NOV 20, 2026',
         targetAudience: 'All students',
         speaker: 'Various performers',
         requirements: ['Audience ticket', 'Performance registration form (for performers)'],
@@ -206,15 +206,15 @@ const seedEvents = [
     {
         id: 4,
         title: 'Tech Workshop',
-        date: 'OCT 29, 2026',
+        date: 'NOV 29, 2026',
         time: '1:00 PM - 5:00 PM',
         venue: 'Computer Lab 1',
         organizer: 'CCS Society',
         category: 'Workshop',
         description: 'Hands-on web development and software basics for students.',
         capacity: 30,
-        registrationDeadline: 'OCT 27, 2026',
-        targetAudience: 'BSCS and BSIT majors, 2nd to 4th year',
+        registrationDeadline: 'NOV 27, 2026',
+        targetAudience: 'BSEMC-GD and BSEMC-DA majors, 2nd to 4th year',
         speaker: 'Computer Science Faculty',
         requirements: ['Laptop', 'Basic programming knowledge'],
         reminderNote: 'Please install the required software before attending.'
@@ -240,10 +240,10 @@ function seedStudentDemoData(demoStudents) {
         return d.toISOString();
     };
     registrations = [
-        { id: 101, eventId: 1, eventTitle: 'Leadership Seminar 2026', studentId: '2026-00123', studentName: 'Juan Dela Cruz', studentCourse: 'BSIT 3A', studentEmail: '', registrationDate: iso(-4), eventCode: '2026-00123', attendanceStatus: STATUS_PENDING, checkInTime: null, checkInMethod: null },
-        { id: 102, eventId: 2, eventTitle: 'Freshmen Orientation', studentId: '2026-00456', studentName: 'Maria Santos', studentCourse: 'BSCS 1B', studentEmail: '', registrationDate: iso(-6), eventCode: '2026-00456', attendanceStatus: 'Attended', checkInTime: iso(-1), checkInMethod: 'Student ID / QR' },
-        { id: 103, eventId: 3, eventTitle: 'Cultural Night 2026', studentId: '2026-00789', studentName: 'Paolo Mendoza', studentCourse: 'BSBA 2C', studentEmail: '', registrationDate: iso(-2), eventCode: '2026-00789', attendanceStatus: STATUS_PENDING, checkInTime: null, checkInMethod: null },
-        { id: 104, eventId: 4, eventTitle: 'Tech Workshop: Web Basics', studentId: '2026-00123', studentName: 'Juan Dela Cruz', studentCourse: 'BSIT 3A', studentEmail: '', registrationDate: iso(-1), eventCode: '2026-00123', attendanceStatus: STATUS_PENDING, checkInTime: null, checkInMethod: null }
+        { id: 101, eventId: 1, eventTitle: 'Leadership Seminar 2026', studentId: '2026-00123', studentName: 'Student. Name', studentCourse: 'BSEMC-GD and BSEMC-DA', studentEmail: '', registrationDate: iso(-4), eventCode: '2026-00123', attendanceStatus: STATUS_PENDING, checkInTime: null, checkInMethod: null },
+        { id: 102, eventId: 2, eventTitle: 'Freshmen Orientation', studentId: '2026-00456', studentName: 'Student. Name', studentCourse: 'BSEMC-GD and BSEMC-DA', studentEmail: '', registrationDate: iso(-6), eventCode: '2026-00456', attendanceStatus: 'Attended', checkInTime: iso(-1), checkInMethod: 'Student ID / QR' },
+        { id: 103, eventId: 3, eventTitle: 'Cultural Night 2026', studentId: '2026-00789', studentName: 'Student. Name', studentCourse: 'BSEMC-GD and BSEMC-DA', studentEmail: '', registrationDate: iso(-2), eventCode: '2026-00789', attendanceStatus: STATUS_PENDING, checkInTime: null, checkInMethod: null },
+        { id: 104, eventId: 4, eventTitle: 'Tech Workshop: Web Basics', studentId: '2026-00123', studentName: 'Student. Name', studentCourse: 'BSEMC-GD and BSEMC-DA', studentEmail: '', registrationDate: iso(-1), eventCode: '2026-00123', attendanceStatus: STATUS_PENDING, checkInTime: null, checkInMethod: null }
     ];
     studentProfiles = {};
     (demoStudents || []).forEach(function (student) {
@@ -268,8 +268,8 @@ function loadStorage() {
                     eventId: 1,
                     eventTitle: 'Leadership Seminar 2026',
                     studentId: '2026-00123',
-                    studentName: 'Juan Dela Cruz',
-                    studentCourse: 'BSIT 3A',
+                    studentName: 'Student. Name',
+                    studentCourse: 'BSEMC-GD and BSEMC-DA',
                     studentEmail: '',
                     registrationDate: new Date().toISOString(),
                     eventCode: '2026-00123',
@@ -282,8 +282,8 @@ function loadStorage() {
                     eventId: 2,
                     eventTitle: 'Freshmen Orientation',
                     studentId: '2026-00456',
-                    studentName: 'Maria Santos',
-                    studentCourse: 'BSCS 1B',
+                    studentName: 'Student. Name',
+                    studentCourse: 'BSEMC-GD and BSEMC-DA',
                     studentEmail: '',
                     registrationDate: new Date().toISOString(),
                     eventCode: '2026-00456',
@@ -1749,7 +1749,7 @@ function initOfficerPage() {
 
         registrantsTableBody.innerHTML = '';
         if (filtered.length === 0) {
-            registrantsTableBody.innerHTML = '<tr><td colspan="7" class="text-center">No registrants for this event yet.</td></tr>';
+            registrantsTableBody.innerHTML = '<tr><td colspan="6" class="text-center">No registrants for this event yet.</td></tr>';
             return;
         }
 
@@ -1760,7 +1760,6 @@ function initOfficerPage() {
                 '<td>' + escapeHtml(reg.studentId) + '</td>' +
                 '<td>' + escapeHtml(reg.studentCourse || 'N/A') + '</td>' +
                 '<td>' + escapeHtml(reg.eventTitle) + '</td>' +
-                '<td><code>' + escapeHtml(reg.eventCode) + '</code></td>' +
                 '<td><span class="status-pill ' + statusPillClass(reg.attendanceStatus) + '">' + escapeHtml(reg.attendanceStatus) + '</span></td>' +
                 '<td>' +
                 '<select class="status-select" data-action="update-status" data-reg-id="' + reg.id + '" aria-label="Update attendance status">' +
@@ -2025,7 +2024,7 @@ function initCheckinPage() {
 
         attendeesTableBody.innerHTML = '';
         if (eventRegistrations.length === 0) {
-            attendeesTableBody.innerHTML = '<tr><td colspan="7" class="text-center">No registrants for this event yet.</td></tr>';
+            attendeesTableBody.innerHTML = '<tr><td colspan="6" class="text-center">No registrants for this event yet.</td></tr>';
             return;
         }
 
@@ -2035,7 +2034,6 @@ function initCheckinPage() {
                 '<td><strong>' + escapeHtml(reg.studentName) + '</strong></td>' +
                 '<td>' + escapeHtml(reg.studentId) + '</td>' +
                 '<td>' + escapeHtml(reg.studentCourse || 'N/A') + '</td>' +
-                '<td><code>' + escapeHtml(reg.eventCode) + '</code></td>' +
                 '<td><span class="status-pill ' + statusPillClass(reg.attendanceStatus) + '">' + escapeHtml(reg.attendanceStatus) + '</span></td>' +
                 '<td>' + (reg.checkInTime ? new Date(reg.checkInTime).toLocaleTimeString() : '---') + '</td>' +
                 '<td>' +

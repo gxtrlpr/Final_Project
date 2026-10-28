@@ -373,7 +373,7 @@ const SERVICE_OFFICES = [
 const FACULTY_MEMBERS = [
     {
         id: 'fac-001',
-        name: 'Prof. Ramon Villanueva',
+        name: 'Professor. Name',
         position: 'Associate Professor',
         department: 'College of Computer Studies',
         subjects: ['Data Structures', 'Algorithms', 'Capstone Project'],
@@ -381,11 +381,11 @@ const FACULTY_MEMBERS = [
         startTime: '09:00',
         endTime: '11:00',
         room: 'Room B-201',
-        email: 'rvillanueva@ccsjdm.edu.ph'
+        email: 'fac-001@ccsjdm.edu.ph'
     },
     {
         id: 'fac-002',
-        name: 'Prof. Celine Marquez',
+        name: 'Professor. Name',
         position: 'Program Head',
         department: 'College of Computer Studies',
         subjects: ['Software Engineering', 'Systems Analysis and Design'],
@@ -393,11 +393,11 @@ const FACULTY_MEMBERS = [
         startTime: '13:00',
         endTime: '16:00',
         room: 'Room B-203',
-        email: 'cmarquez@ccsjdm.edu.ph'
+        email: 'fac-002@ccsjdm.edu.ph'
     },
     {
         id: 'fac-003',
-        name: 'Prof. Daniel Ocampo',
+        name: 'Professor. Name',
         position: 'Assistant Professor',
         department: 'College of Business and Accountancy',
         subjects: ['Financial Accounting', 'Business Statistics'],
@@ -405,11 +405,11 @@ const FACULTY_MEMBERS = [
         startTime: '10:00',
         endTime: '12:00',
         room: 'Room C-110',
-        email: 'docampo@ccsjdm.edu.ph'
+        email: 'fac-003@ccsjdm.edu.ph'
     },
     {
         id: 'fac-004',
-        name: 'Prof. Aileen Bautista',
+        name: 'Professor. Name',
         position: 'Professor',
         department: 'College of Education',
         subjects: ['Facilitating Learning', 'Assessment of Learning'],
@@ -417,11 +417,11 @@ const FACULTY_MEMBERS = [
         startTime: '08:00',
         endTime: '10:00',
         room: 'Room D-105',
-        email: 'abautista@ccsjdm.edu.ph'
+        email: 'fac-004@ccsjdm.edu.ph'
     },
     {
         id: 'fac-005',
-        name: 'Prof. Michael Santos',
+        name: 'Professor. Name',
         position: 'Associate Professor',
         department: 'College of Engineering',
         subjects: ['Engineering Mathematics', 'Thermodynamics'],
@@ -429,11 +429,11 @@ const FACULTY_MEMBERS = [
         startTime: '14:00',
         endTime: '16:00',
         room: 'Room E-202',
-        email: 'msantos@ccsjdm.edu.ph'
+        email: 'fac-005@ccsjdm.edu.ph'
     },
     {
         id: 'fac-006',
-        name: 'Prof. Grace Delos Reyes',
+        name: 'Professor. Name',
         position: 'Instructor',
         department: 'College of Arts and Sciences',
         subjects: ['Purposive Communication', 'Technical Writing'],
@@ -441,7 +441,7 @@ const FACULTY_MEMBERS = [
         startTime: '09:00',
         endTime: '11:30',
         room: 'Room F-108',
-        email: 'gdelosreyes@ccsjdm.edu.ph'
+        email: 'fac-006@ccsjdm.edu.ph'
     }
 ];
 
@@ -1047,7 +1047,7 @@ function initServiceDirectoryPage() {
         const today = new Date().getDay();
         facultyGrid.innerHTML = matches.map(function (member) {
             const availableToday = member.days.indexOf(today) !== -1;
-            const initials = member.name.replace('Prof. ', '').split(' ').map(function (part) {
+            const initials = member.name.split(' ').map(function (part) {
                 return part.charAt(0).toUpperCase();
             }).slice(0, 2).join('');
 
@@ -1151,9 +1151,9 @@ function seedDemoData() {
     loadServiceData();
 
     const demoStudents = [
-        { id: '2026-00123', name: 'Juan Dela Cruz', course: 'BSIT 3A' },
-        { id: '2026-00456', name: 'Maria Santos', course: 'BSCS 1B' },
-        { id: '2026-00789', name: 'Paolo Mendoza', course: 'BSBA 2C' }
+        { id: '2026-00123', name: 'Student. Name', course: 'BSEMC-GD and BSEMC-DA' },
+        { id: '2026-00456', name: 'Student. Name', course: 'BSEMC-GD and BSEMC-DA' },
+        { id: '2026-00789', name: 'Student. Name', course: 'BSEMC-GD and BSEMC-DA' }
     ];
 
     const registrarDate = nextDayMatching([1, 2, 3, 4, 5], 1);
@@ -1164,35 +1164,35 @@ function seedDemoData() {
         {
             id: 'APT-DEMO-1', reference: 'APT-2026-0001', targetId: 'registrar', targetName: 'Office of the Registrar',
             targetType: 'office', serviceId: 'registrar-tor', serviceName: 'Request Transcript of Records',
-            studentId: '2026-00123', studentName: 'Juan Dela Cruz', date: registrarDate, time: '10:00',
+            studentId: '2026-00123', studentName: 'Student. Name', date: registrarDate, time: '10:00',
             purpose: 'Transcript for job application', requirementsConfirmed: true,
             status: APPOINTMENT_STATUS.confirmed, createdAt: new Date().toISOString(), history: []
         },
         {
             id: 'APT-DEMO-2', reference: 'APT-2026-0002', targetId: 'guidance', targetName: 'Guidance and Counseling Office',
             targetType: 'office', serviceId: 'guidance-goodmoral', serviceName: 'Good Moral Certificate',
-            studentId: '2026-00123', studentName: 'Juan Dela Cruz', date: guidanceDate, time: '13:30',
+            studentId: '2026-00123', studentName: 'Student. Name', date: guidanceDate, time: '13:30',
             purpose: 'Scholarship application', requirementsConfirmed: true,
             status: APPOINTMENT_STATUS.confirmed, createdAt: new Date().toISOString(), history: []
         },
         {
-            id: 'APT-DEMO-3', reference: 'APT-2026-0003', targetId: 'fac-001', targetName: 'Prof. Ramon Villanueva',
+            id: 'APT-DEMO-3', reference: 'APT-2026-0003', targetId: 'fac-001', targetName: 'Professor. Name',
             targetType: 'faculty', serviceId: 'faculty-consultation', serviceName: 'Academic Consultation',
-            studentId: '2026-00456', studentName: 'Maria Santos', date: facultyDate, time: '09:30',
+            studentId: '2026-00456', studentName: 'Student. Name', date: facultyDate, time: '09:30',
             purpose: 'Capstone project consultation', requirementsConfirmed: true,
             status: APPOINTMENT_STATUS.confirmed, createdAt: new Date().toISOString(), history: []
         },
         {
             id: 'APT-DEMO-4', reference: 'APT-2026-0004', targetId: 'clinic', targetName: 'Medical and Dental Clinic',
             targetType: 'office', serviceId: 'clinic-dental', serviceName: 'Dental Check-up',
-            studentId: '2026-00123', studentName: 'Juan Dela Cruz', date: dateOffsetKey(-6), time: '09:00',
+            studentId: '2026-00123', studentName: 'Student. Name', date: dateOffsetKey(-6), time: '09:00',
             purpose: 'Routine check-up', requirementsConfirmed: true,
             status: APPOINTMENT_STATUS.completed, createdAt: new Date().toISOString(), history: []
         },
         {
             id: 'APT-DEMO-5', reference: 'APT-2026-0005', targetId: 'student-affairs', targetName: 'Office of Student Affairs and Services',
             targetType: 'office', serviceId: 'osas-scholarship', serviceName: 'Scholarship and Financial Assistance',
-            studentId: '2026-00789', studentName: 'Paolo Mendoza', date: dateOffsetKey(-3), time: '14:00',
+            studentId: '2026-00789', studentName: 'Student. Name', date: dateOffsetKey(-3), time: '14:00',
             purpose: 'Grant renewal', requirementsConfirmed: true,
             status: APPOINTMENT_STATUS.missed, createdAt: new Date().toISOString(), history: []
         }
@@ -1203,35 +1203,35 @@ function seedDemoData() {
         {
             id: 'TKT-DEMO-1', code: 'R-001', number: 1, officeId: 'registrar', officeName: 'Office of the Registrar',
             serviceId: 'registrar-enrolment', serviceName: 'Enrolment and Subject Concern',
-            studentId: '2026-00456', studentName: 'Maria Santos', date: day,
+            studentId: '2026-00456', studentName: 'Student. Name', date: day,
             issuedAt: new Date(Date.now() - 2400000).toISOString(), status: QUEUE_STATUS.serving,
             calledAt: new Date(Date.now() - 300000).toISOString(), completedAt: null
         },
         {
             id: 'TKT-DEMO-2', code: 'R-002', number: 2, officeId: 'registrar', officeName: 'Office of the Registrar',
             serviceId: 'registrar-cor', serviceName: 'Certificate of Registration Copy',
-            studentId: '2026-00789', studentName: 'Paolo Mendoza', date: day,
+            studentId: '2026-00789', studentName: 'Student. Name', date: day,
             issuedAt: new Date(Date.now() - 1800000).toISOString(), status: QUEUE_STATUS.waiting,
             calledAt: null, completedAt: null
         },
         {
             id: 'TKT-DEMO-3', code: 'R-003', number: 3, officeId: 'registrar', officeName: 'Office of the Registrar',
             serviceId: 'registrar-enrolment', serviceName: 'Enrolment and Subject Concern',
-            studentId: '2026-00123', studentName: 'Juan Dela Cruz', date: day,
+            studentId: '2026-00123', studentName: 'Student. Name', date: day,
             issuedAt: new Date(Date.now() - 900000).toISOString(), status: QUEUE_STATUS.waiting,
             calledAt: null, completedAt: null
         },
         {
             id: 'TKT-DEMO-4', code: 'C-001', number: 1, officeId: 'clinic', officeName: 'Medical and Dental Clinic',
             serviceId: 'clinic-consult', serviceName: 'Medical Consultation',
-            studentId: '2026-00123', studentName: 'Juan Dela Cruz', date: day,
+            studentId: '2026-00123', studentName: 'Student. Name', date: day,
             issuedAt: new Date(Date.now() - 5400000).toISOString(), status: QUEUE_STATUS.completed,
             calledAt: new Date(Date.now() - 5000000).toISOString(), completedAt: new Date(Date.now() - 4500000).toISOString()
         },
         {
             id: 'TKT-DEMO-5', code: 'S-001', number: 1, officeId: 'student-affairs', officeName: 'Office of Student Affairs and Services',
             serviceId: 'osas-id', serviceName: 'Student ID Concern',
-            studentId: '2026-00789', studentName: 'Paolo Mendoza', date: day,
+            studentId: '2026-00789', studentName: 'Student. Name', date: day,
             issuedAt: new Date(Date.now() - 7200000).toISOString(), status: QUEUE_STATUS.missed,
             calledAt: new Date(Date.now() - 6600000).toISOString(), completedAt: null
         }
@@ -1246,19 +1246,19 @@ function seedDemoData() {
     serviceFeedback = [
         {
             id: 'FB-DEMO-1', visitType: 'appointment', visitId: 'APT-DEMO-4', officeId: 'clinic',
-            officeName: 'Medical and Dental Clinic', studentId: '2026-00123', studentName: 'Juan Dela Cruz',
+            officeName: 'Medical and Dental Clinic', studentId: '2026-00123', studentName: 'Student. Name',
             rating: 5, categories: ['Staff courtesy', 'Cleanliness'], comment: 'The dentist explained everything clearly.',
             anonymous: false, createdAt: new Date(Date.now() - 86400000 * 5).toISOString()
         },
         {
             id: 'FB-DEMO-2', visitType: 'queue', visitId: 'TKT-DEMO-4', officeId: 'clinic',
-            officeName: 'Medical and Dental Clinic', studentId: '2026-00123', studentName: 'Juan Dela Cruz',
+            officeName: 'Medical and Dental Clinic', studentId: '2026-00123', studentName: 'Student. Name',
             rating: 4, categories: ['Waiting time'], comment: 'Fast service but the waiting area was full.',
             anonymous: true, createdAt: new Date(Date.now() - 3600000).toISOString()
         },
         {
             id: 'FB-DEMO-3', visitType: 'appointment', visitId: 'APT-DEMO-5', officeId: 'student-affairs',
-            officeName: 'Office of Student Affairs and Services', studentId: '2026-00789', studentName: 'Paolo Mendoza',
+            officeName: 'Office of Student Affairs and Services', studentId: '2026-00789', studentName: 'Student. Name',
             rating: 3, categories: ['Clarity of requirements'], comment: 'I was not told to bring a barangay certificate.',
             anonymous: false, createdAt: new Date(Date.now() - 86400000 * 2).toISOString()
         }
@@ -1269,7 +1269,7 @@ function seedDemoData() {
         { id: 'NTF-DEMO-2', studentId: '2026-00123', message: 'Queue number R-003 issued for Registrar.', kind: 'queue', createdAt: new Date(Date.now() - 900000).toISOString(), read: false },
         { id: 'NTF-DEMO-3', studentId: '2026-00123', message: 'Your clinic visit is completed. Please rate your visit.', kind: 'feedback', createdAt: new Date(Date.now() - 4500000).toISOString(), read: true },
         { id: 'NTF-DEMO-4', studentId: '2026-00456', message: 'Your number R-001 is now being served.', kind: 'queue', createdAt: new Date(Date.now() - 300000).toISOString(), read: false },
-        { id: 'NTF-DEMO-5', studentId: '', facultyId: 'fac-001', message: 'New appointment APT-2026-0003 from Maria Santos (2026-00456) on ' + formatDateLabel(facultyDate) + ' at 9:30 AM.', kind: 'appointment', createdAt: new Date(Date.now() - 3600000).toISOString(), read: false }
+        { id: 'NTF-DEMO-5', studentId: '', facultyId: 'fac-001', message: 'New appointment APT-2026-0003 from Student. Name (2026-00456) on ' + formatDateLabel(facultyDate) + ' at 9:30 AM.', kind: 'appointment', createdAt: new Date(Date.now() - 3600000).toISOString(), read: false }
     ];
 
     saveServiceData();

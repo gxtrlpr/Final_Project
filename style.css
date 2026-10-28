@@ -3529,6 +3529,12 @@ html.device-blocked #loginModal {
     text-decoration: underline;
 }
 
+.auth-modal,
+.modal {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
 html[data-theme="dark"] {
     --color-primary: #5196e1;
     --color-primary-dark: #87b6ea;
