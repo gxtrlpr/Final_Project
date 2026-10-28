@@ -41,7 +41,7 @@ No package installation or build step is required. A modern web browser and a lo
 3. Open **http://localhost:8000/** in your browser. The home page is `index.html`.
 4. Stop the server with `Ctrl+C` when finished.
 
-The site may also be hosted as static files on a web server. Keep the `assets/` folder alongside the HTML, CSS, and JavaScript files.
+The site may also be hosted as static files on a web server. Keep the uploaded files together: the HTML pages share `app.js`, `services.js`, and `style.css`, and the `assets/` folder must stay alongside them.
 
 ## Demo access
 
