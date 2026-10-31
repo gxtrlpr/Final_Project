@@ -75,4 +75,4 @@ The login screens simulate different user roles for presentation purposes. They 
 - The site uses sample records and simulated logins. It is not connected to a production database or a real campus booking service.
 - Some pages reference `manifest.json`, which is not included in this repository. A browser may report a missing manifest, and app installation is not configured.
 
-For a class submission, the project team can add its course, section, member names, instructor, and submission date as required by the instructor.
+Submitted to: Rio Dela Cruz
