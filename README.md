@@ -73,6 +73,7 @@ The login screens simulate different user roles for presentation purposes. They 
 - Appointments, registrations, queue numbers, and sessions are stored in the current browser's local storage. They are not synchronized across devices or users, and other people using the same browser profile may be able to view them.
 - Clearing the site's browser data removes local changes; sample data may be created again when the site is opened.
 - The site uses sample records and simulated logins. It is not connected to a production database or a real campus booking service.
-- Some pages reference `manifest.json`, which is not included in this repository. A browser may report a missing manifest, and app installation is not configured.
+- Some pages reference `manifest.json`, which is not included in this repository or in this project.
+- `manifest.json` is used when i created a sample app.
 
 Submitted to: Rio Dela Cruz
