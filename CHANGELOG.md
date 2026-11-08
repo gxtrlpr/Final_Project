@@ -115,3 +115,9 @@ Source: /home/user/project (unchanged). This copy holds the flat restyle.
 - A real Chromium sweep of 96 loads (12 pages x 4 sessions x light and dark) reports no console errors, no failed requests, no missing images and the correct theme on every page.
 - Screenshots reviewed at 1400px, 820px and 420px, in light and dark, signed in and signed out.
 - Earlier checks still pass: 36 of 36 jsdom renders, 0 broken asset references, 156 of 156 button contrast states, JS syntax, CSS braces balanced.
+
+## Round 12: remove the remaining initials circles
+
+- The welcome card on the home pages had its own initials circle. Removed for the same reason as the navbar: the seal is the only circle.
+- Removed the unused `.greeting-avatar` rules so nothing is left dead.
+- Deleted `assets/example.txt`, a stray test file no page referenced. The assets folder now holds only the four real images.

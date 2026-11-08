@@ -1011,7 +1011,6 @@ function renderGreeting() {
     const role = isStudentLoggedIn() ? 'Student' : (isFacultyLoggedIn() ? 'Professor' : 'Event Organizer');
     greeting.hidden = false;
     greeting.innerHTML =
-        '<span class="greeting-avatar">' + escapeHtml(name.charAt(0).toUpperCase()) + '</span>' +
         '<span class="greeting-text"><strong>Welcome back, ' + escapeHtml(name) + '!</strong>' +
         '<small>Signed in as ' + role + '</small></span>';
 }

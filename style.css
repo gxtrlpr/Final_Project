@@ -3598,20 +3598,6 @@ html.device-blocked #loginModal {
     max-width: 100%;
 }
 
-.greeting-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--color-surface);
-    color: var(--color-primary-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-}
-
 .greeting-text {
     display: flex;
     flex-direction: column;
@@ -3627,11 +3613,6 @@ html.device-blocked #loginModal {
     background: var(--color-primary-soft);
     border-color: var(--color-primary-border);
     color: var(--color-primary-dark);
-}
-
-.container > .user-greeting .greeting-avatar {
-    background: var(--color-primary);
-    color: var(--color-on-primary);
 }
 
 .info-page {
