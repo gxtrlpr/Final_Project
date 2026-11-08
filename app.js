@@ -1066,17 +1066,6 @@ function navbarDisplayName(name) {
     return prefix ? prefix + ' ' + clean : clean;
 }
 
-function navbarInitials(text) {
-    const words = String(text || '')
-        .replace(/^(prof\.|organizer\.)/i, '')
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
-    if (!words.length) return '?';
-    if (words.length === 1) return words[0].charAt(0).toUpperCase();
-    return (words[0].charAt(0) + words[words.length - 1].charAt(0)).toUpperCase();
-}
-
 function currentDisplayName() {
     if (isStudentLoggedIn()) return getStudentSession().username;
     if (isFacultyLoggedIn()) return getFacultySession().username;
@@ -1117,8 +1106,6 @@ function renderAuthArea() {
     const roleText = isFacultyLoggedIn() ? 'Professor Desk' : (isHostLoggedIn() ? 'Event Dashboard' : '');
 
     pill.innerHTML =
-        '<span class="nav-avatar" aria-hidden="true">' + escapeHtml(navbarInitials(displayName)) +
-        '<span class="nav-online"></span></span>' +
         '<span class="nav-user-name">' + escapeHtml(displayName) + '</span>' +
         '<span class="nav-bell-wrap" id="navBellWrap"></span>';
 
@@ -1173,7 +1160,7 @@ function wireNavLogout() {
 function wireAccountMenu() {
     const pill = document.getElementById('navUserPill');
     const menu = document.getElementById('navMenu');
-    if (!pill || !menu || !pill.querySelector('.nav-avatar')) return;
+    if (!pill || !menu || !pill.querySelector('.nav-user-name')) return;
     const toggle = function (event) {
         event.stopPropagation();
         const willOpen = menu.hidden;

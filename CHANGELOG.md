@@ -94,12 +94,14 @@ Source: /home/user/project (unchanged). This copy holds the flat restyle.
 - Built from the three reference images, in separate steps: HTML, then CSS, then JavaScript, then verification.
 - Assets: the supplied `ccsjdm-seal.jpeg` and `ccsjdm-wordmark.jpeg` are byte-identical (same MD5) to the copies already in `assets/`, so no file was replaced. The seal now sits in a circular frame, matching the reference's rounded logo slot.
 - Desktop bar: seal, the user pill, the centred segmented nav (the current page is a raised white pill with accent text), and a moon button on the right. Dark mode is a moon button, as in the reference.
-- User pill: avatar with initials and a green online dot, the display name, and the notification bell with a red count badge. There is no chevron and no person icon, per the user's instruction.
+- User pill: the display name and the notification bell with a red count badge, and nothing else. There is no chevron and no person icon, per the user's instruction.
 - Names follow the requested rule. Students show the username they chose. Professors show "Prof." plus the name. Organizers show "Organizer." plus the name. The prefix is not stacked if the stored name already starts with it.
 - Signed out: a blue "Log In" button in the pill's place, as chosen.
 - Account menu: clicking the pill opens a menu with the role page (Professor Desk or Event Dashboard) and Log out.
 - Mobile (860px and below): the nav collapses to a drawer under the bar. The drawer holds the links, the role link, a Dark Mode row with a toggle switch, and a red Log out row, matching the reference.
 - The hamburger closes on outside taps, on picking a link, and when the window widens past 860px. Its label switches between Open menu and Close menu.
+- The initials circle and the online dot were removed. You asked for the pill to hold only the name and the bell, and the only circle in the bar is the seal.
+
 - The current page keeps a real link with `aria-current="page"` instead of a plain span, so it is still clickable and screen readers still announce the position.
 - A small inline script in `<head>` applies the saved theme before first paint, so dark mode no longer flashes white on load.
 
@@ -109,7 +111,7 @@ Source: /home/user/project (unchanged). This copy holds the flat restyle.
 - The signed-out Log In button sat cramped inside the grey pill. It now has its own compact shape.
 
 ### Verification
-- 38 of 38 interaction assertions pass: login, logout from both the drawer and the menu, the account menu open and close, the hamburger, theme switching and persistence, the professor role label, and `aria-current`.
+- 41 of 41 interaction assertions pass: login, logout from both the drawer and the menu, the account menu open and close, the hamburger, theme switching and persistence, the professor role label, and `aria-current`.
 - A real Chromium sweep of 96 loads (12 pages x 4 sessions x light and dark) reports no console errors, no failed requests, no missing images and the correct theme on every page.
 - Screenshots reviewed at 1400px, 820px and 420px, in light and dark, signed in and signed out.
 - Earlier checks still pass: 36 of 36 jsdom renders, 0 broken asset references, 156 of 156 button contrast states, JS syntax, CSS braces balanced.
