@@ -2689,31 +2689,33 @@ function unreadNotificationCount() {
 }
 
 function renderNotificationBell() {
-    const area = document.getElementById('navAuthArea');
-    if (!area) return;
+    const wrapper = document.getElementById('navBellWrap');
     const existing = document.getElementById('notificationBell');
-    if (!isStudentLoggedIn() && !isFacultyLoggedIn()) {
+    if (!wrapper) {
         if (existing) existing.remove();
         return;
     }
+    if (!isStudentLoggedIn() && !isFacultyLoggedIn()) {
+        wrapper.innerHTML = '';
+        return;
+    }
     const unread = unreadNotificationCount();
-    const markup =
-        '<button type="button" class="bell-btn" id="notificationBellBtn" aria-haspopup="true" aria-expanded="false" aria-label="Notifications">' +
-        '<svg class="bell-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>' + 'Alerts ' + (unread > 0 ? '<span class="bell-badge">' + unread + '</span>' : '') + '</button>' +
+    wrapper.innerHTML =
+        '<button type="button" class="nav-bell" id="notificationBellBtn" aria-haspopup="true" aria-expanded="false" aria-label="Notifications">' +
+        '<svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>' +
+        (unread > 0 ? '<span class="nav-bell-badge">' + unread + '</span>' : '') +
+        '</button>' +
         '<div class="bell-dropdown" id="notificationDropdown" role="menu" hidden></div>';
 
-    let wrapper = existing;
-    if (!wrapper) {
-        wrapper = document.createElement('span');
-        wrapper.className = 'bell-wrap';
-        wrapper.id = 'notificationBell';
-        area.insertBefore(wrapper, area.firstChild);
-    }
-    wrapper.innerHTML = markup;
+    const wrapperId = document.createElement('span');
+    wrapperId.id = 'notificationBell';
+    wrapperId.hidden = true;
+    wrapper.appendChild(wrapperId);
 
     const button = document.getElementById('notificationBellBtn');
     const dropdown = document.getElementById('notificationDropdown');
-    button.onclick = function () {
+    button.onclick = function (clickEvent) {
+        clickEvent.stopPropagation();
         const willOpen = dropdown.hidden;
         dropdown.hidden = !willOpen;
         button.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
@@ -2723,12 +2725,17 @@ function renderNotificationBell() {
         saveServiceData();
         setTimeout(function () { renderNotificationBell(); }, 1200);
     };
-    document.addEventListener('click', function (clickEvent) {
-        if (!dropdown || dropdown.hidden) return;
-        if (wrapper.contains(clickEvent.target)) return;
-        dropdown.hidden = true;
-        button.setAttribute('aria-expanded', 'false');
-    });
+    if (!renderNotificationBell.bound) {
+        renderNotificationBell.bound = true;
+        document.addEventListener('click', function (clickEvent) {
+            const openDropdown = document.getElementById('notificationDropdown');
+            const openButton = document.getElementById('notificationBellBtn');
+            if (!openDropdown || openDropdown.hidden) return;
+            if (openDropdown.contains(clickEvent.target) || (openButton && openButton.contains(clickEvent.target))) return;
+            openDropdown.hidden = true;
+            if (openButton) openButton.setAttribute('aria-expanded', 'false');
+        });
+    }
 }
 
 function renderNotificationDropdown(dropdown) {

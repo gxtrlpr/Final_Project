@@ -7,30 +7,48 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1d5fa6">
     <link rel="stylesheet" href="style.css">
+    <script>try{if(localStorage.getItem('ccsjdm_theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 </head>
 <body>
 
     <a class="skip-link" href="#mainContent">Skip to main content</a>
 
     <header class="navbar">
-        <div class="logo-container">
-            <a class="logo-link" href="https://ccsjdm.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the City College of San Jose del Monte website">
-                <img class="logo" src="assets/ccsjdm-seal.jpeg" alt="City College of San Jose del Monte official seal">
-            </a>
-            <span class="brand-title">Appointments and schedule</span>
-        </div>
+        <a class="nav-seal" href="https://ccsjdm.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the City College of San Jose del Monte website">
+            <img src="assets/ccsjdm-seal.jpeg" alt="City College of San Jose del Monte official seal">
+        </a>
 
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
+        <div class="nav-account" id="navAccount">
+            <div class="nav-user-pill" id="navUserPill"></div>
+            <div class="nav-menu" id="navMenu" role="menu" hidden></div>
+        </div>
 
         <nav class="nav-links" id="navLinks" aria-label="Main navigation">
             <a href="index.html">Home</a>
             <a href="services.html">Appointments</a>
             <a href="events.html">Events</a>
             <a href="my-events.html">My Schedule</a>
-            <span class="nav-role-slot" id="navRoleSlot"></span>
-            <button type="button" class="nav-text-btn" id="themeToggleBtn" aria-pressed="false">Dark mode</button>
-            <span class="nav-auth-area" id="navAuthArea"></span>
+            <div class="nav-drawer-section" id="navDrawerRole"></div>
+            <div class="nav-drawer-theme">
+                <span class="nav-drawer-theme-text">
+                    <svg class="nav-icon" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span>Dark Mode</span>
+                </span>
+                <button type="button" class="nav-switch" id="themeToggleBtn" role="switch" aria-checked="false" aria-label="Dark mode">
+                    <span class="nav-switch-knob" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="nav-drawer-section" id="navDrawerAuth"></div>
         </nav>
+
+        <div class="nav-end">
+            <button type="button" class="nav-moon" id="themeMoonBtn" aria-pressed="false" aria-label="Dark mode">
+                <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+                <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
+        </div>
     </header>
 
     <main class="container" id="mainContent">
