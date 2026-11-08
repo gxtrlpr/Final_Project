@@ -1,0 +1,25 @@
+{
+    "name": "Appointments and Schedule",
+    "short_name": "Appointments",
+    "description": "A school project prototype for campus appointments, digital queue numbers, and events at City College of San Jose del Monte.",
+    "start_url": "index.html",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#f4f7fc",
+    "theme_color": "#1d5fa6",
+    "lang": "en",
+    "icons": [
+        {
+            "src": "assets/app-icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/app-icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}

@@ -79,3 +79,45 @@ Source: /home/user/project (unchanged). This copy holds the flat restyle.
 - Queue position: a ticket that is being served or called no longer counts as ahead. Waiting tickets still count. This matches the intended behavior and the queue test.
 - The preview server on port 8001 had stopped. It was restarted from /home/user/project-v2.
 - Queue assertions in run-tests run only while the registrar is open. Outside office hours, they are skipped.
+
+## Round 10: repo sync, button text verification, dark-mode fix, manifest
+
+- Uploaded files synced into the repository. The uploaded `style.css` was missing the `.btn-primary:visited` and `.btn-register:visited` rules described in Round 9, so the button-text fix was not actually present. It is restored.
+- Task 1 (button text) verified with a cascade calculator instead of a browser: 156 button states pass WCAG AA across 6 page contexts, light and dark, normal, hover and visited. The 12 disabled-button states stay below AA on purpose, because WCAG 1.4.3 exempts inactive controls.
+- Real bug found and fixed: in dark mode `.hero-actions .btn-secondary` was painted by the dark `.btn-secondary` rule (specificity 0,2,0) instead of `.hero-actions .btn-secondary` (0,1,1). It rendered near-black text on a near-black background, 1.12:1. The dark hero now keeps the transparent background and light text, 12.18:1.
+- `manifest.json` created. All 12 pages linked it and the file was missing. It uses the two icons already in `assets/` and the accent color.
+- Verification: 36 of 36 page renders clean (12 pages x visitor, student, host), 0 broken asset references, CSS braces balance, JS syntax passes.
+- Written but not yet acted on: a full text-contrast audit over 2502 text elements found smaller items, including `.demo-note` at 2.56:1, the hero eyebrow chip, and four category badges. Scheduled as a separate step.
+
+## Round 11: navbar redesign (Task 2)
+
+- Built from the three reference images, in separate steps: HTML, then CSS, then JavaScript, then verification.
+- Assets: the supplied `ccsjdm-seal.jpeg` and `ccsjdm-wordmark.jpeg` are byte-identical (same MD5) to the copies already in `assets/`, so no file was replaced. The seal now sits in a circular frame, matching the reference's rounded logo slot.
+- Desktop bar: seal, the user pill, the centred segmented nav (the current page is a raised white pill with accent text), and a moon button on the right. Dark mode is a moon button, as in the reference.
+- User pill: the display name and the notification bell with a red count badge, and nothing else. There is no chevron and no person icon, per the user's instruction.
+- Names follow the requested rule. Students show the username they chose. Professors show "Prof." plus the name. Organizers show "Organizer." plus the name. The prefix is not stacked if the stored name already starts with it.
+- Signed out: a blue "Log In" button in the pill's place, as chosen.
+- Account menu: clicking the pill opens a menu with the role page (Professor Desk or Event Dashboard) and Log out.
+- Mobile (860px and below): the nav collapses to a drawer under the bar. The drawer holds the links, the role link, a Dark Mode row with a toggle switch, and a red Log out row, matching the reference.
+- The hamburger closes on outside taps, on picking a link, and when the window widens past 860px. Its label switches between Open menu and Close menu.
+- The initials circle and the online dot were removed. You asked for the pill to hold only the name and the bell, and the only circle in the bar is the seal.
+
+- The current page keeps a real link with `aria-current="page"` instead of a plain span, so it is still clickable and screen readers still announce the position.
+- A small inline script in `<head>` applies the saved theme before first paint, so dark mode no longer flashes white on load.
+
+### Bugs found and fixed while verifying
+- The drawer's Log out row was rendering with a raw browser button border because it sat outside the `.nav-menu` rules. It now has its own full reset.
+- The notifications dropdown was positioned against the small bell icon inside the pill, so it overflowed off the left edge of the screen. It is now anchored to the account area.
+- The signed-out Log In button sat cramped inside the grey pill. It now has its own compact shape.
+
+### Verification
+- 41 of 41 interaction assertions pass: login, logout from both the drawer and the menu, the account menu open and close, the hamburger, theme switching and persistence, the professor role label, and `aria-current`.
+- A real Chromium sweep of 96 loads (12 pages x 4 sessions x light and dark) reports no console errors, no failed requests, no missing images and the correct theme on every page.
+- Screenshots reviewed at 1400px, 820px and 420px, in light and dark, signed in and signed out.
+- Earlier checks still pass: 36 of 36 jsdom renders, 0 broken asset references, 156 of 156 button contrast states, JS syntax, CSS braces balanced.
+
+## Round 12: remove the remaining initials circles
+
+- The welcome card on the home pages had its own initials circle. Removed for the same reason as the navbar: the seal is the only circle.
+- Removed the unused `.greeting-avatar` rules so nothing is left dead.
+- Deleted `assets/example.txt`, a stray test file no page referenced. The assets folder now holds only the four real images.

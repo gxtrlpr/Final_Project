@@ -1011,31 +1011,29 @@ function renderGreeting() {
     const role = isStudentLoggedIn() ? 'Student' : (isFacultyLoggedIn() ? 'Professor' : 'Event Organizer');
     greeting.hidden = false;
     greeting.innerHTML =
-        '<span class="greeting-avatar">' + escapeHtml(name.charAt(0).toUpperCase()) + '</span>' +
         '<span class="greeting-text"><strong>Welcome back, ' + escapeHtml(name) + '!</strong>' +
         '<small>Signed in as ' + role + '</small></span>';
 }
 
 function initThemeToggle() {
-    const button = document.getElementById('themeToggleBtn');
+    const drawerSwitch = document.getElementById('themeToggleBtn');
+    const moonButton = document.getElementById('themeMoonBtn');
     const applyTheme = function (theme) {
         if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
         else document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('ccsjdm_theme', theme);
-        if (button) {
-            button.setAttribute('aria-pressed', String(theme === 'dark'));
-            button.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
-        }
+        if (drawerSwitch) drawerSwitch.setAttribute('aria-checked', String(theme === 'dark'));
+        if (moonButton) moonButton.setAttribute('aria-pressed', String(theme === 'dark'));
     };
     applyTheme(localStorage.getItem('ccsjdm_theme') === 'dark' ? 'dark' : 'light');
-    if (button) {
-        button.onclick = function () {
-            applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-        };
-    }
+    const toggle = function () {
+        applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    };
+    if (drawerSwitch) drawerSwitch.onclick = toggle;
+    if (moonButton) moonButton.onclick = toggle;
 }
 
-// Marks the page the user is on. Its nav link becomes plain text (aria-current), so it cannot be tapped.
+// Marks the page the user is on with aria-current, so assistive tech knows where they are.
 function applyCurrentNav() {
     const nav = document.getElementById('navLinks');
     if (!nav) return;
@@ -1043,61 +1041,159 @@ function applyCurrentNav() {
     const sectionOf = { 'event-details.html': 'events.html', 'service-details.html': 'services.html', 'checkin.html': 'officer.html' };
     const current = sectionOf[file] || file;
     nav.querySelectorAll('a[href]').forEach(function (link) {
-        if (link.getAttribute('href') !== current) return;
-        const label = document.createElement('span');
-        label.className = 'nav-current';
-        label.setAttribute('aria-current', 'page');
-        label.textContent = link.textContent;
-        link.replaceWith(label);
+        if (link.getAttribute('href') !== current) {
+            link.removeAttribute('aria-current');
+            return;
+        }
+        link.setAttribute('aria-current', 'page');
+        link.className = 'nav-current';
     });
 }
 
-function renderAuthArea() {
-    const area = document.getElementById('navAuthArea');
-    const roleSlot = document.getElementById('navRoleSlot');
-    if (!area) return;
-    if (roleSlot) roleSlot.innerHTML = '';
+function navbarRoleLabel() {
+    if (isStudentLoggedIn()) return '';
+    if (isFacultyLoggedIn()) return 'Prof.';
+    if (isHostLoggedIn()) return 'Organizer.';
+    return '';
+}
 
-    if (isStudentLoggedIn()) {
-        const session = getStudentSession();
-        area.innerHTML =
-            '<span class="nav-user">' + escapeHtml(session.username) + '</span>' +
-            '<button type="button" class="btn-logout" id="navLogoutBtn">Logout</button>';
-    } else if (isFacultyLoggedIn()) {
-        const facultySession = getFacultySession();
-        if (roleSlot) roleSlot.innerHTML = '<a class="nav-link-host" href="faculty.html">Professor Desk</a>';
-        area.innerHTML =
-            '<span class="nav-user">' + escapeHtml(facultySession.username) + '</span>' +
-            '<button type="button" class="btn-logout" id="navLogoutBtn">Logout</button>';
-    } else if (isHostLoggedIn()) {
-        const session = getHostSession();
-        if (roleSlot) roleSlot.innerHTML = '<a class="nav-link-host" href="officer.html">Event Dashboard</a>';
-        area.innerHTML =
-            '<span class="nav-user">' + escapeHtml(session.username) + '</span>' +
-            '<button type="button" class="btn-logout" id="navLogoutBtn">Logout</button>';
-    } else {
-        area.innerHTML = '<button type="button" class="btn-login" id="navLoginBtn">Log In</button>';
+function navbarDisplayName(name) {
+    const clean = String(name || '').trim();
+    if (!clean) return 'Guest';
+    if (/^(prof\.|organizer\.)/i.test(clean)) return clean;
+    const prefix = navbarRoleLabel();
+    return prefix ? prefix + ' ' + clean : clean;
+}
+
+function currentDisplayName() {
+    if (isStudentLoggedIn()) return getStudentSession().username;
+    if (isFacultyLoggedIn()) return getFacultySession().username;
+    if (isHostLoggedIn()) return getHostSession().username;
+    return '';
+}
+
+// Builds the avatar pill, the drawer rows and the account menu for the signed-in role.
+function renderAuthArea() {
+    const pill = document.getElementById('navUserPill');
+    const menu = document.getElementById('navMenu');
+    const drawerAuth = document.getElementById('navDrawerAuth');
+    const drawerRole = document.getElementById('navDrawerRole');
+    if (!pill) return;
+    if (drawerRole) drawerRole.innerHTML = '';
+    if (drawerAuth) drawerAuth.innerHTML = '';
+
+    const signedIn = isStudentLoggedIn() || isFacultyLoggedIn() || isHostLoggedIn();
+
+    if (!signedIn) {
+        pill.className = 'nav-user-pill nav-user-pill--guest';
+        pill.innerHTML =
+            '<button type="button" class="btn-primary nav-login-btn" id="navLoginBtn">Log In</button>';
+        if (menu) {
+            menu.hidden = true;
+            menu.innerHTML = '';
+        }
+        if (drawerAuth) drawerAuth.innerHTML = '';
+        applyCurrentNav();
+        wireNavLogin();
+        if (typeof renderNotificationBell === 'function') renderNotificationBell();
+        return;
+    }
+
+    pill.className = 'nav-user-pill';
+    const displayName = navbarDisplayName(currentDisplayName());
+    const roleHref = isFacultyLoggedIn() ? 'faculty.html' : (isHostLoggedIn() ? 'officer.html' : '');
+    const roleText = isFacultyLoggedIn() ? 'Professor Desk' : (isHostLoggedIn() ? 'Event Dashboard' : '');
+
+    pill.innerHTML =
+        '<span class="nav-user-name">' + escapeHtml(displayName) + '</span>' +
+        '<span class="nav-bell-wrap" id="navBellWrap"></span>';
+
+    if (menu) {
+        menu.innerHTML =
+            (roleText ? '<a href="' + roleHref + '" role="menuitem">' + roleText + '</a>' : '') +
+            '<button type="button" id="navMenuLogout" role="menuitem">Log out</button>';
+    }
+
+    if (drawerAuth) {
+        drawerAuth.innerHTML =
+            '<button type="button" class="nav-drawer-logout" id="navDrawerLogout">' +
+            '<svg class="nav-icon" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path></svg>' +
+            'Log out</button>';
+    }
+
+    if (drawerRole && roleText) {
+        drawerRole.innerHTML = '<a class="nav-drawer-role-link" href="' + roleHref + '">' + roleText + '</a>';
     }
 
     applyCurrentNav();
+    wireNavLogout();
+    wireAccountMenu();
+    if (typeof renderNotificationBell === 'function') renderNotificationBell();
+}
 
+function wireNavLogin() {
     const loginButton = document.getElementById('navLoginBtn');
     if (loginButton) loginButton.onclick = function () { openAuthChoiceModal(); };
+}
 
-    const logoutButton = document.getElementById('navLogoutBtn');
-    if (logoutButton) {
-        logoutButton.onclick = function () {
-            if (isStudentLoggedIn()) endStudentSession();
-            else if (isFacultyLoggedIn()) endFacultySession();
-            else endHostSession();
-            renderAuthArea();
-            renderGreeting();
-            refreshCurrentPage();
-            showNotification('You have been logged out.', 'info');
-        };
+function performNavLogout() {
+    if (isStudentLoggedIn()) endStudentSession();
+    else if (isFacultyLoggedIn()) endFacultySession();
+    else endHostSession();
+    const menu = document.getElementById('navMenu');
+    if (menu) menu.hidden = true;
+    renderAuthArea();
+    renderGreeting();
+    refreshCurrentPage();
+    showNotification('You have been logged out.', 'info');
+}
+
+function wireNavLogout() {
+    ['navMenuLogout', 'navDrawerLogout'].forEach(function (id) {
+        const button = document.getElementById(id);
+        if (button) button.onclick = performNavLogout;
+    });
+}
+
+function wireAccountMenu() {
+    const pill = document.getElementById('navUserPill');
+    const menu = document.getElementById('navMenu');
+    if (!pill || !menu || !pill.querySelector('.nav-user-name')) return;
+    const toggle = function (event) {
+        event.stopPropagation();
+        const willOpen = menu.hidden;
+        menu.hidden = !willOpen;
+        pill.setAttribute('aria-expanded', String(willOpen));
+    };
+    pill.onclick = toggle;
+    pill.setAttribute('role', 'button');
+    pill.setAttribute('tabindex', '0');
+    pill.setAttribute('aria-expanded', 'false');
+    pill.setAttribute('aria-haspopup', 'true');
+    pill.onkeydown = function (keyEvent) {
+        if (keyEvent.key !== 'Enter' && keyEvent.key !== ' ') return;
+        keyEvent.preventDefault();
+        toggle(keyEvent);
+    };
+    if (!wireAccountMenu.bound) {
+        wireAccountMenu.bound = true;
+        document.addEventListener('click', function (clickEvent) {
+            const area = document.getElementById('navAccount');
+            const openMenu = document.getElementById('navMenu');
+            if (!area || !openMenu || openMenu.hidden) return;
+            if (area.contains(clickEvent.target)) return;
+            openMenu.hidden = true;
+            const openPill = document.getElementById('navUserPill');
+            if (openPill) openPill.setAttribute('aria-expanded', 'false');
+        });
+        document.addEventListener('keydown', function (keyEvent) {
+            if (keyEvent.key !== 'Escape') return;
+            const openMenu = document.getElementById('navMenu');
+            if (!openMenu || openMenu.hidden) return;
+            openMenu.hidden = true;
+        });
     }
-
-    if (typeof renderNotificationBell === 'function') renderNotificationBell();
 }
 
 function currentPageName() {
@@ -2231,10 +2327,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
+    const closeNavMenu = function () {
+        if (!navToggle || !navLinks) return;
+        navLinks.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Open menu');
+    };
     if (navToggle && navLinks) {
         navToggle.addEventListener('click', function () {
-            const isOpen = navLinks.classList.toggle('show');
+            const isOpen = navLinks.classList.toggle('nav-open');
             navToggle.setAttribute('aria-expanded', String(isOpen));
+            navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        });
+        navLinks.addEventListener('click', function (clickEvent) {
+            if (clickEvent.target.closest('button')) return;
+            closeNavMenu();
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860) closeNavMenu();
         });
     }
 
