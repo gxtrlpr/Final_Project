@@ -79,3 +79,12 @@ Source: /home/user/project (unchanged). This copy holds the flat restyle.
 - Queue position: a ticket that is being served or called no longer counts as ahead. Waiting tickets still count. This matches the intended behavior and the queue test.
 - The preview server on port 8001 had stopped. It was restarted from /home/user/project-v2.
 - Queue assertions in run-tests run only while the registrar is open. Outside office hours, they are skipped.
+
+## Round 10: repo sync, button text verification, dark-mode fix, manifest
+
+- Uploaded files synced into the repository. The uploaded `style.css` was missing the `.btn-primary:visited` and `.btn-register:visited` rules described in Round 9, so the button-text fix was not actually present. It is restored.
+- Task 1 (button text) verified with a cascade calculator instead of a browser: 156 button states pass WCAG AA across 6 page contexts, light and dark, normal, hover and visited. The 12 disabled-button states stay below AA on purpose, because WCAG 1.4.3 exempts inactive controls.
+- Real bug found and fixed: in dark mode `.hero-actions .btn-secondary` was painted by the dark `.btn-secondary` rule (specificity 0,2,0) instead of `.hero-actions .btn-secondary` (0,1,1). It rendered near-black text on a near-black background, 1.12:1. The dark hero now keeps the transparent background and light text, 12.18:1.
+- `manifest.json` created. All 12 pages linked it and the file was missing. It uses the two icons already in `assets/` and the accent color.
+- Verification: 36 of 36 page renders clean (12 pages x visitor, student, host), 0 broken asset references, CSS braces balance, JS syntax passes.
+- Written but not yet acted on: a full text-contrast audit over 2502 text elements found smaller items, including `.demo-note` at 2.56:1, the hero eyebrow chip, and four category badges. Scheduled as a separate step.
