@@ -121,3 +121,19 @@ Source: /home/user/project (unchanged). This copy holds the flat restyle.
 - The welcome card on the home pages had its own initials circle. Removed for the same reason as the navbar: the seal is the only circle.
 - Removed the unused `.greeting-avatar` rules so nothing is left dead.
 - Deleted `assets/example.txt`, a stray test file no page referenced. The assets folder now holds only the four real images.
+
+## Round 13: log in from anywhere, land on home
+
+- Logging in as a student or a professor now always sends the user to the home page, wherever they were on the site. The rule applies from every one of the 12 pages.
+- The welcome message is carried through the page load. A toast that was on the old page would vanish the instant the browser navigated, so the message is saved to `sessionStorage` and shown once on home.
+- Registering for an event while logged out still works: the register intent survives the login, and the welcome message explains that the event must be opened again. There is deliberately no second redirect, because that would bounce the user back and forth.
+- The organizer login still goes straight to the Event Dashboard. That page is the organizer's workspace, and sending them home would have been a downgrade. They see their login gate when signed out, so there is no redirect loop.
+
+### Care taken
+- An earlier draft of the register resume redirected to `events.html`, which looped forever because every page runs the same start-up code. It was caught in review and replaced with a message instead of a redirect.
+- A pending-action queue existed for this exact case, but nothing called it, so it is left alone rather than re-wired into a redirect path.
+
+### Verification
+- 25 of 25 real-browser assertions: student login from 10 different pages all land on home, the faculty login does too, logging in while already on home stays on home, the navbar shows the name after arrival, and the organizer reaches the dashboard.
+- The register-while-logged-out flow completes in a single navigation, with no loop.
+- 96 of 96 page loads clean (12 pages x 4 sessions x light and dark), with no console errors, no failed requests and the correct navbar.
