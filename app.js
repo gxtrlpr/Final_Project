@@ -528,6 +528,32 @@ function initHostLoginModal(onGranted) {
     };
 }
 
+// Sends the user to the home page after a successful login.
+// The welcome toast is stashed in sessionStorage first: a page load would wipe
+// an on-screen toast before it is ever seen, so home reads the message on arrival.
+function goHomeFromLogin(message) {
+    try {
+        sessionStorage.setItem('ccsjdm_login_toast', message);
+    } catch (error) {
+        /* storage blocked - the redirect still matters more than the message */
+    }
+    window.location.href = 'index.html';
+}
+
+// Reads and clears the toast queued by goHomeFromLogin. Called once on load.
+function consumeLoginToast() {
+    let message = '';
+    try {
+        message = sessionStorage.getItem('ccsjdm_login_toast') || '';
+        sessionStorage.removeItem('ccsjdm_login_toast');
+    } catch (error) {
+        return;
+    }
+    if (message && typeof showNotification === 'function') {
+        showNotification(message, 'success');
+    }
+}
+
 function isDesktopDevice() {
     const viewportWidth = Math.max(window.innerWidth || 0, document.documentElement.clientWidth || 0);
     return viewportWidth >= DESKTOP_MIN_WIDTH;
@@ -853,12 +879,8 @@ function initAuthUi() {
 
             endStudentSession();
             startFacultySession(knownFaculty.name, knownFaculty.id);
-            closeAuthModals();
             facultyForm.reset();
-            renderAuthArea();
-            renderGreeting();
-            refreshCurrentPage();
-            showNotification('Welcome, ' + knownFaculty.name + '!', 'success');
+            goHomeFromLogin('Welcome, ' + knownFaculty.name + '!');
         };
     }
 
@@ -890,23 +912,19 @@ function initAuthUi() {
                 password.length >= 1 ? '' : 'Please enter your password.');
             if (!okUser || !okId || !okPass) return;
 
-            const wantedRegister = pendingRegisterIntent;
-            const queuedAction = pendingAuthAction;
+            // A pending register intent is carried across the redirect so the
+            // student still lands on the event's registration after logging in.
+            if (pendingRegisterIntent) {
+                try {
+                    sessionStorage.setItem('ccsjdm_resume_register', '1');
+                } catch (error) {
+                    /* not fatal */
+                }
+            }
             endFacultySession();
             startStudentSession(username, studentId);
-            closeAuthModals();
             studentForm.reset();
-            renderAuthArea();
-            renderGreeting();
-            refreshCurrentPage();
-            showNotification('Welcome, ' + username + '!', 'success');
-
-            if (typeof queuedAction === 'function') {
-                queuedAction();
-            } else if (wantedRegister) {
-                const registerButton = document.getElementById('confirmRegisterBtn');
-                if (registerButton) registerButton.click();
-            }
+            goHomeFromLogin('Welcome, ' + username + '!');
         };
     }
 
@@ -1212,6 +1230,30 @@ function refreshCurrentPage() {
     else if (page === 'index.html') initHomeIntroPage();
     else if (page === 'faculty.html' && typeof initFacultyDeskPage === 'function') initFacultyDeskPage();
     if (typeof renderNotificationBell === 'function') renderNotificationBell();
+}
+
+// Runs once on boot. Shows the toast stashed before the redirect home.
+// If the student had pressed Register on an event before logging in, they now
+// land on home rather than that event, so the toast says how to get back.
+function restoreLoginIntent() {
+    let resume = false;
+    try {
+        resume = sessionStorage.getItem('ccsjdm_resume_register') === '1';
+        sessionStorage.removeItem('ccsjdm_resume_register');
+    } catch (error) {
+        resume = false;
+    }
+    if (resume) {
+        // Never redirect again: the user asked to always land on home, and a
+        // second hop would loop. A clearer toast is the whole fix.
+        const stashed = 'Welcome! Open the event again to finish registering.';
+        try {
+            sessionStorage.setItem('ccsjdm_login_toast', stashed);
+        } catch (error) {
+            /* ignore */
+        }
+    }
+    consumeLoginToast();
 }
 
 function getProtectedMain() {
@@ -2319,6 +2361,7 @@ function initCheckinPage() {
 document.addEventListener('DOMContentLoaded', function () {
     loadStorage();
     applyDeviceClass();
+    restoreLoginIntent();
 
     window.addEventListener('resize', function () {
         applyDeviceClass();
