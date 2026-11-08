@@ -215,6 +215,14 @@ a:visited {
     color: var(--color-primary-dark);
 }
 
+.btn-primary:visited {
+    color: var(--color-on-primary);
+}
+
+.btn-register:visited {
+    color: white;
+}
+
 .search-filter-section {
     background: var(--color-primary-soft);
     padding: clamp(1rem, 2.5vw, 2rem);
@@ -3732,6 +3740,16 @@ html[data-theme="dark"] .hero-lead {
 
 html[data-theme="dark"] .hero-actions .btn-primary:hover {
     background: #03173a;
+}
+
+html[data-theme="dark"] .hero-actions .btn-secondary {
+    background: transparent;
+    color: var(--color-on-primary);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+html[data-theme="dark"] .hero-actions .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 html[data-theme="dark"] .hero-note {
