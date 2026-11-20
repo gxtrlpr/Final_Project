@@ -3681,7 +3681,7 @@ html[data-theme="dark"] {
     --color-surface: #141414;
     --color-surface-alt: #0f1922;
     --color-surface-muted: #111d28;
-    --color-on-primary: #141414;
+    --color-on-primary: #ffffff;
     --color-text: #c0c0c0;
     --color-heading: #b6c5dc;
     --color-body: #8e9db3;
@@ -3934,6 +3934,10 @@ html[data-theme="dark"] .home-secondary-num {
 
     .nav-moon {
         display: none;
+    }
+
+    .nav-end {
+        margin-left: auto;
     }
 
     .nav-toggle {
