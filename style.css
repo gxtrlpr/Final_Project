@@ -3702,11 +3702,11 @@ html[data-theme="dark"] .search-filter-section {
 }
 
 html[data-theme="dark"] .search-bar button {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .chip.active, html[data-theme="dark"] .chip:hover {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .event-card:hover {
@@ -3727,7 +3727,7 @@ html[data-theme="dark"] .event-code-badge {
 }
 
 html[data-theme="dark"] .btn-register {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .btn-register.btn-disabled, html[data-theme="dark"] .btn-register.btn-disabled:hover {
@@ -3743,15 +3743,15 @@ html[data-theme="dark"] .btn-secondary:hover {
 }
 
 html[data-theme="dark"] .btn-success {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .btn-warning {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .btn-danger {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .reminder-box {
@@ -3767,7 +3767,7 @@ html[data-theme="dark"] .reminder-box p {
 }
 
 html[data-theme="dark"] .btn-register-large {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .btn-register-large:disabled {
@@ -3779,7 +3779,7 @@ html[data-theme="dark"] .highlight-code {
 }
 
 html[data-theme="dark"] .tab-btn.active {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .status-pill.late {
@@ -3804,7 +3804,7 @@ html[data-theme="dark"] .input-error {
 }
 
 html[data-theme="dark"] .checkin-tab-btn.active {
-    color: #141414;
+    color: #ffffff;
 }
 
 html[data-theme="dark"] .checkin-feedback-box.warning {
